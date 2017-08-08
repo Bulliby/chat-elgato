@@ -1,24 +1,23 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
 security:
+     providers:
+         custom_provider:
+            entity:
+                class: BullibyUserBundle:User
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
-    providers:
-        in_memory:
-            memory: ~
+     encoders:
+         Bulliby\UserBundle\Entity\User:    
+            algorithm: bcrypt
+            cost: 12
 
-    firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
+     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
             anonymous: ~
-            # activate different ways to authenticate
-
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+            form_login: 
+                login_path: login
+                check_path: login
+            guard:
+                authenticators:
+                     - bulliby.form_authenticator

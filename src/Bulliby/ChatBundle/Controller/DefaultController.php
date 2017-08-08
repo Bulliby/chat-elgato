@@ -8,10 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="homepage")
      */
     public function indexAction()
     {
-        return $this->render('BullibyChatBundle:Default:index.html.twig');
+        return $this->render('BullibyChatBundle:Chat:render.html.twig');
     }
 }

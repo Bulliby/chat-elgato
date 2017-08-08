@@ -4,6 +4,6 @@ bulliby_chat:
     prefix:   /
 
 bulliby_user:
-    resource: "@Bulliby/UserBundle/Controller/"
+    resource: "@BullibyUserBundle/Controller/"
     type:     annotation
     prefix:   /user
