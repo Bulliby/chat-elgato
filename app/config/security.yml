@@ -2,10 +2,10 @@ security:
      providers:
          custom_provider:
             entity:
-                class: BullibyUserBundle:User
+                class: AppBundle:User
 
      encoders:
-         Bulliby\UserBundle\Entity\User:    
+         AppBundle\Entity\User:    
             algorithm: bcrypt
             cost: 12
 

@@ -2,20 +2,21 @@
 
 namespace Bulliby\ChatBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Ratchet\MessageComponentInterface;
-use Ratchet\ConnectionInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+
 
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
 
-use Bulliby\ChatBundle\Command\Chat;
+use Bulliby\ChatBundle\Services\Chat;
 
 
-class LaunchRatchetServerCommand extends Command
+class LaunchRatchetServerCommand extends ContainerAwareCommand
 {
 
     protected function configure()
@@ -34,7 +35,7 @@ class LaunchRatchetServerCommand extends Command
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(
-                    new Chat()
+                    $this->getContainer()->get('test')
                 )
             ),
             8080,

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bulliby/UserBundle.git",
-                "reference": "ea7500c3f9e76b8288d0568651b183db9f42b7ef"
+                "reference": "341dd0dfe4bd26217fa4a966863ad2e8e04c240a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bulliby/UserBundle/zipball/ea7500c3f9e76b8288d0568651b183db9f42b7ef",
-                "reference": "ea7500c3f9e76b8288d0568651b183db9f42b7ef",
+                "url": "https://api.github.com/repos/Bulliby/UserBundle/zipball/341dd0dfe4bd26217fa4a966863ad2e8e04c240a",
+                "reference": "341dd0dfe4bd26217fa4a966863ad2e8e04c240a",
                 "shasum": ""
             },
             "type": "library",
@@ -27,10 +27,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/Bulliby/UserBundle/tree/master",
+                "source": "https://github.com/Bulliby/UserBundle/tree/bundle",
                 "issues": "https://github.com/Bulliby/UserBundle/issues"
             },
-            "time": "2017-08-08T18:00:22+00:00"
+            "time": "2017-08-13T16:21:02+00:00"
         },
         {
             "name": "cboden/ratchet",
