@@ -12,6 +12,7 @@ class ChatController extends Controller
      */
     public function renderAction()
     {
+        var_dump($this->get('session'));
         return $this->render('BullibyChatBundle:Chat:render.html.twig');
     }
 }

@@ -1,4 +1,3 @@
 services:
   test:
     class: Bulliby\ChatBundle\Service\Chat
-    arguments: ["@security.token_storage"]

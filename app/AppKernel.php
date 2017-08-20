@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Bulliby\ChatBundle\BullibyChatBundle(),
             new Bulliby\UserBundle\BullibyUserBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

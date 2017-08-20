@@ -15,6 +15,11 @@ use Ratchet\ConnectionInterface;
 
 use Bulliby\ChatBundle\Services\Chat;
 
+use Ratchet\Session\SessionProvider;
+use Symfony\Component\HttpFoundation\Session\Storage\Handler;
+use Ratchet\App;
+
+
 
 class LaunchRatchetServerCommand extends ContainerAwareCommand
 {
@@ -30,8 +35,6 @@ class LaunchRatchetServerCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //require dirname(__DIR__) . '/vendor/autoload.php';
-
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(

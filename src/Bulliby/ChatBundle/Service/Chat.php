@@ -5,15 +5,16 @@ namespace Bulliby\ChatBundle\Service;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+
  
 class Chat implements MessageComponentInterface
 {
     protected $clients;
-    private $token;
 
-    public function __construct(TokenStorage $token) {
+    public function __construct() {
         $this->clients = new \SplObjectStorage;
-        $this->token = $token;
     }
 
     public function onOpen(ConnectionInterface $conn) {
@@ -22,16 +23,17 @@ class Chat implements MessageComponentInterface
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        var_dump($this->token);
         $numRecv = count($this->clients) - 1;
         echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
             , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
-
+        
+        
         foreach ($this->clients as $client) {
             if ($from !== $client) {
                 $client->send($msg);
             }
         }
+
     }
 
     public function onClose(ConnectionInterface $conn) {
