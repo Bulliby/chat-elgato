@@ -1,3 +1,4 @@
 services:
   test:
     class: Bulliby\ChatBundle\Service\Chat
+    arguments: ["@snc_redis.default"]
