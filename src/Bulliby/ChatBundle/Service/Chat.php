@@ -55,6 +55,8 @@ class Chat implements MessageComponentInterface
         $user = strstr($user, '|');
         $user = substr($user, 1);
         $user = unserialize($user);
-        var_dump(unserialize($user['_security_main']));
+        $user = unserialize($user['_security_main']);
+        var_dump($user);
+        return $user;
     }
 }
