@@ -2,10 +2,10 @@
     "name": "bulliby/chat",
     "license": "proprietary",
     "type": "project",
+    "minimum-stability":"dev",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle",
-            "Bulliby\\ChatBundle\\": "src/Bulliby/ChatBundle"
+            "": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -20,15 +20,10 @@
             "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
         ]
     },
-    "repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/Bulliby/UserBundle.git"
-    }
-    ],
     "require": {
         "php": ">=5.5.9",
         "bulliby/user-bundle": "dev-master",
+        "bulliby/user-token-bundle": "dev-master",
         "cboden/ratchet": "^0.3.6",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
@@ -37,7 +32,6 @@
         "predis/predis": "^1.1",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "snc/redis-bundle": "^2.0",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",

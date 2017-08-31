@@ -1,4 +1,4 @@
 services:
-  test:
-    class: Bulliby\ChatBundle\Service\Chat
-    arguments: ["@snc_redis.default"]
+    chat:
+        class: Bulliby\ChatBundle\Service\Chat
+        arguments: ['@security.token_storage']

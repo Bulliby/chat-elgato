@@ -6,21 +6,18 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Predis\Client;
 
  
 class Chat implements MessageComponentInterface
 {
     protected $clients;
-    private $redis;
 
-    public function __construct(Client $redis) {
+    public function __construct(TokenStorage $userToken) {
         $this->clients = new \SplObjectStorage;
-        $this->redis = $redis;
+        $this->userToken = $userToken;
     }
 
     public function onOpen(ConnectionInterface $conn) {
-        $this->clients->attach($conn);
         echo "New connection! ({$conn->resourceId})\n";
     }
 
@@ -34,29 +31,16 @@ class Chat implements MessageComponentInterface
                 $client->send($msg);
             }
         }
-        $this->getUser();
+        var_dump($this->userToken->getToken()->getUser());
     }
 
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
-
         echo "Connection {$conn->resourceId} has disconnected\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
         echo "An error has occurred: {$e->getMessage()}\n";
         $conn->close();
-    }
-
-    private function getUser()
-    {
-        $sessionId = $this->redis->keys('*')[0];
-        $user = $this->redis->get($sessionId);
-        $user = strstr($user, '|');
-        $user = substr($user, 1);
-        $user = unserialize($user);
-        $user = unserialize($user['_security_main']);
-        var_dump($user);
-        return $user;
     }
 }

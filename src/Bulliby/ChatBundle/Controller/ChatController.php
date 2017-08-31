@@ -4,6 +4,7 @@ namespace Bulliby\ChatBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class ChatController extends Controller
 {
@@ -14,4 +15,5 @@ class ChatController extends Controller
     {
         return $this->render('BullibyChatBundle:Chat:render.html.twig');
     }
+
 }

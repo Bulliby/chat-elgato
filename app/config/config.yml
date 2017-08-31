@@ -1,7 +1,12 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
+      #- { resource: services.yml }
+    - { resource: "@BullibyUserTokenBundle/Resources/config/services.yml" }
+    - { resource: "@BullibyUserTokenBundle/Resources/config/security.yml" }
+    - { resource: "@BullibyUserBundle/Resources/config/services.yml" }
+      #- { resource: "@BullibyUserBundle/Resources/config/security.yml" }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -70,15 +75,15 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-snc_redis:
-    clients:
-        default:
-            type: predis
-            alias: default
-            dsn: redis://127.0.0.1
-        session:
-            type: predis
-            alias: session
-            dsn: redis://127.0.0.1/1
-    session:
-        client: session
+    #snc_redis:
+    #    clients:
+    #        default:
+    #            type: predis
+    #            alias: default
+    #            dsn: redis://127.0.0.1
+    #        session:
+    #            type: predis
+    #            alias: session
+    #            dsn: redis://127.0.0.1/1
+    #    session:
+    #        client: session

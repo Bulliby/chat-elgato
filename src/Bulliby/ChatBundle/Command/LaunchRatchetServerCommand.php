@@ -38,7 +38,7 @@ class LaunchRatchetServerCommand extends ContainerAwareCommand
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(
-                    $this->getContainer()->get('test')
+                    $this->getContainer()->get('chat')
                 )
             ),
             8080,
