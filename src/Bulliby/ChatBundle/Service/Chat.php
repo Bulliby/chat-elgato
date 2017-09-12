@@ -4,7 +4,6 @@ namespace Bulliby\ChatBundle\Service;
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\HttpFoundation\Session\Session;
 
  
@@ -12,13 +11,13 @@ class Chat implements MessageComponentInterface
 {
     protected $clients;
 
-    public function __construct(TokenStorage $userToken) {
+    public function __construct() {
         $this->clients = new \SplObjectStorage;
-        $this->userToken = $userToken;
     }
 
     public function onOpen(ConnectionInterface $conn) {
         echo "New connection! ({$conn->resourceId})\n";
+        $this->clients->attach($conn);
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
@@ -31,7 +30,6 @@ class Chat implements MessageComponentInterface
                 $client->send($msg);
             }
         }
-        var_dump($this->userToken->getToken()->getUser());
     }
 
     public function onClose(ConnectionInterface $conn) {

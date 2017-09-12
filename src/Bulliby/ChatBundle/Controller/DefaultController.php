@@ -14,7 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('BullibyChatBundle:Chat:render.html.twig');
+        return $this->render('BullibyChatBundle:Chat:render.html.twig', array());
     }
 
     /**

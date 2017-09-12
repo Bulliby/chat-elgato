@@ -3,18 +3,20 @@
     <h1>Chat El-Gato</h1>
 {% endblock %}
 
-{% if app.user %}
-    {% block chatclient %}
-        <script>
-            var data = new Object();
-            data.username = '{{ app.user.email }}';
-            data.to = 'test@gmail.com';
-            data.message = 'Mon message top secret';
-            data = JSON.stringify(data);
-
-            var conn = new WebSocket('ws://127.0.0.1:8080');
-            conn.onmessage = function(e) { console.log(e.data); };
-            conn.onopen = function(e) { conn.send(data); };
-        </script>
-    {% endblock %}
-{% endif %}
+{% block chatclient %}
+    <script>
+        var data = new Object();
+        {% if app.user.email is defined %}
+            data.email = '{{ app.user.email }}';
+        {% endif %}
+        {% if app.user.token is defined %}
+            data.token = '{{ app.user.token }}';
+        {% endif %}
+        data.to = 'test@gmail.com';
+        data.message = 'Mon message top secret';
+        data = JSON.stringify(data);        
+        var conn = new WebSocket('ws://127.0.0.1:8080');
+        conn.onmessage = function(e) { console.log(e.data); };
+        conn.onopen = function(e) { conn.send(data); };
+    </script>
+{% endblock %}
