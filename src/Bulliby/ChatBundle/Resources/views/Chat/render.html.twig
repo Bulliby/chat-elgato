@@ -9,12 +9,13 @@
         {% if app.user %}
             data.email = '{{ app.user.email }}';
             data.token = '{{ app.user.token }}';
-            data.to = 'test@gmail.com';
+            data.to = 'var@gmail.com';
+            data.message = 'Mon message top secret';
+            data = JSON.stringify(data);        
+            var conn = new WebSocket('ws://127.0.0.1:8080?user={{ app.user.email }}&token={{ app.user.token }}');
+            conn.onmessage = function(e) { console.log(e.data); };
+            conn.onopen = function(e) {
+            };
         {% endif %}
-        data.message = 'Mon message top secret';
-        data = JSON.stringify(data);        
-        var conn = new WebSocket('ws://127.0.0.1:8080');
-        conn.onmessage = function(e) { console.log(e.data); };
-        conn.onopen = function(e) { conn.send(data); };
     </script>
 {% endblock %}

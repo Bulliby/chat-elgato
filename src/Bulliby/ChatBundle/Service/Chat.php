@@ -6,9 +6,11 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Bulliby\ChatBundle\Inter\SecurityCheckInterface;
  
-class Chat implements MessageComponentInterface
+class Chat implements MessageComponentInterface,  SecurityCheckInterface
 {
     protected $clients;
     private $em;
@@ -22,37 +24,83 @@ class Chat implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn) 
     {
-        echo "New connection! ({$conn->resourceId})\n";
         $this->clients->attach($conn);
+        $params = $conn->WebSocket->request->getQuery()->toArray();
+        $user = $this->TokenIdCheck($params['token'], $params['user']);
+        $this->clients->attach($user);
     }
 
     public function onMessage(ConnectionInterface $from, $msg) 
     {
-        $this->canISendTheMessage($msg);
-        foreach ($this->clients as $client) {
-            if ($from !== $client) {
-                $client->send($msg);
-            }
+		if(($sender = $this->getUserWhoSendMsg($from)) === NULL)
+			throw new NotFoundHttpException('Vous n\'êtes pas enregistré dans la base');
+		if ($to = $this->canISendTheMessage($sender['user'], $msg))
+        {
+            $receiver = $this->getReceiver($to);
+            $receiver['conn']->send($msg); 
         }
+        $this->clients->rewind();
     }
 
-    /**
-     * Function who check if the message can be send. We can have for example
-     * a test to see that the sender can contact this user.
-     *
-     * This function is intended to be overwriten
-     */
-    private function canISendTheMessage($msg)
+    public function getNum()
     {
-        $this->msg  = json_decode($msg);
-        if (!isset($this->msg->token))
-            return;
-        $user = $this->em->getRepository('AppBundle:User')->findOneBy(array('token' => $this->msg->token));
-        if (empty($user))
-            throw new NotFoundHttpException("Petit hacker ne modifie pas tes requetes!!");
+        return count($this->clients);
+    }
+
+	public function getUserWhoSendMsg($from)
+	{
+        $sender = [];
+		$this->clients->rewind();
+        while($this->clients->valid()) 
+        {
+			if ($this->clients->current() === $from)
+            {
+                $sender['conn'] = $this->clients->current(); 
+                $this->clients->next();
+                $sender['user'] = $this->clients->current();
+                return $sender;
+            }
+			$this->clients->next();
+		}
+		return NULL;
+	}
+
+    public function getReceiver($to)
+    {
+        $receiver = [];
+		$this->clients->rewind();
+        while($this->clients->valid()) 
+        {
+            $receiver['conn'] = $this->clients->current(); 
+            $this->clients->next();
+            var_dump($this->clients->current());
+            var_dump($to);
+			if ($this->clients->current() === $to)
+            {
+                $receiver['user'] = $this->clients->current();
+                return $receiver;
+            }
+			$this->clients->next();
+		}
+		return NULL;
+    }
+
+    public function TokenIdCheck($token, $id)
+    {
+        $user = $this->em->getRepository('AppBundle:User')->findOneBy(array('token' => $token));
+        if (empty($user) || $user->getEmail() != $id)
+            throw new AccessDeniedHttpException('Votre identité n\'est pas vérifiée');
+        return $user;
+    }
+    
+    private function canISendTheMessage($sender, $msg)
+    {
+		$this->msg = json_decode($msg);
         $to = $this->em->getRepository('AppBundle:User')->findOneBy(array('email' => $this->msg->to));
-        if ($to->getFamilly() != $user->getFamilly())
-            throw new NotFoundHttpException("Petit hacker ne modifie pas tes requetes!!");
+        if (empty($to) || $to->getFamilly() != $sender->getFamilly())
+            throw new AccessDeniedHttpException('Vous ne pouvez contacter cette personne');
+        
+        return $to;
     }
 
     public function onClose(ConnectionInterface $conn) {
