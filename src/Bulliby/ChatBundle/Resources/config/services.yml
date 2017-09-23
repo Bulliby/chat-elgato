@@ -1,4 +1,4 @@
 services:
     chat:
         class: Bulliby\ChatBundle\Service\Chat
-        arguments: ['@security.token_storage']
+        arguments: ['@doctrine.orm.entity_manager']

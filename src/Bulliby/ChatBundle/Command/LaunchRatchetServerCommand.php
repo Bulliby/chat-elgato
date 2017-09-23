@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Session\Storage\Handler;
 use Ratchet\App;
 
 
-
 class LaunchRatchetServerCommand extends ContainerAwareCommand
 {
 

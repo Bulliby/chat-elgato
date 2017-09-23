@@ -6,13 +6,11 @@
 {% block chatclient %}
     <script>
         var data = new Object();
-        {% if app.user.email is defined %}
+        {% if app.user %}
             data.email = '{{ app.user.email }}';
-        {% endif %}
-        {% if app.user.token is defined %}
             data.token = '{{ app.user.token }}';
+            data.to = 'test@gmail.com';
         {% endif %}
-        data.to = 'test@gmail.com';
         data.message = 'Mon message top secret';
         data = JSON.stringify(data);        
         var conn = new WebSocket('ws://127.0.0.1:8080');
