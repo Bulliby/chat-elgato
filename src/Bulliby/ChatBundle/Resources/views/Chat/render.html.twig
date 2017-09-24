@@ -1,6 +1,8 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <h1>Chat El-Gato</h1>
+    <input type="text" name="msg" id="msg"></input>
+    <input type="submit" name="envoyer" id="envoyer"></input>
 {% endblock %}
 
 {% block chatclient %}
@@ -9,12 +11,21 @@
         {% if app.user %}
             data.email = '{{ app.user.email }}';
             data.token = '{{ app.user.token }}';
-            data.to = 'var@gmail.com';
-            data.message = 'Mon message top secret';
-            data = JSON.stringify(data);        
+            data.to = 'token@gmail.com';
             var conn = new WebSocket('ws://127.0.0.1:8080?user={{ app.user.email }}&token={{ app.user.token }}');
             conn.onmessage = function(e) { console.log(e.data); };
             conn.onopen = function(e) {
+                var button = document.getElementById('envoyer');
+                button.onclick = sendMessage;
+                function sendMessage(event)
+                {
+                    event.preventDefault();
+                    var contenu = document.getElementById('msg').value;
+                    data.contenu = contenu;
+                    data = JSON.stringify(data);        
+                    console.log('test');
+                    conn.send(data);
+                }
             };
         {% endif %}
     </script>

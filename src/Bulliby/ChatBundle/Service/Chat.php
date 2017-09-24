@@ -42,11 +42,6 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
         $this->clients->rewind();
     }
 
-    public function getNum()
-    {
-        return count($this->clients);
-    }
-
 	public function getUserWhoSendMsg($from)
 	{
         $sender = [];
@@ -73,8 +68,6 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
         {
             $receiver['conn'] = $this->clients->current(); 
             $this->clients->next();
-            var_dump($this->clients->current());
-            var_dump($to);
 			if ($this->clients->current() === $to)
             {
                 $receiver['user'] = $this->clients->current();
