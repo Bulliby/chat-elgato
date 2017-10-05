@@ -7,8 +7,8 @@
 
 {% block chatclient %}
     <script>
-        var data = new Object();
         {% if app.user %}
+            var data = new Object();
             data.email = '{{ app.user.email }}';
             data.token = '{{ app.user.token }}';
             data.to = 'token@gmail.com';
@@ -17,16 +17,18 @@
             conn.onopen = function(e) {
                 var button = document.getElementById('envoyer');
                 button.onclick = sendMessage;
-                function sendMessage(event)
-                {
-                    event.preventDefault();
-                    var contenu = document.getElementById('msg').value;
-                    data.contenu = contenu;
-                    data = JSON.stringify(data);        
-                    console.log('test');
-                    conn.send(data);
-                }
+                console.log('Connection Open');
             };
+            function sendMessage(event)
+            {
+                event.preventDefault();
+                var contenu = document.getElementById('msg').value;
+                data.contenu = contenu;
+                msg = JSON.stringify(data);        
+                conn.send(msg);
+                console.log('Message Sent');
+                console.log('value:' + msg);
+            }
         {% endif %}
     </script>
 {% endblock %}

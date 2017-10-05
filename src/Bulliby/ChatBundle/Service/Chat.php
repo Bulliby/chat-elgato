@@ -102,7 +102,7 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
-        echo "An error has occurred: {$e->getMessage()}\n";
+        echo "An error has occurred: {$e->getMessage()} {$e}\n";
         $conn->close();
     }
 }
