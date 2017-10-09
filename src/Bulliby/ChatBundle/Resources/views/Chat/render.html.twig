@@ -6,29 +6,7 @@
 {% endblock %}
 
 {% block chatclient %}
-    <script>
-        {% if app.user %}
-            var data = new Object();
-            data.email = '{{ app.user.email }}';
-            data.token = '{{ app.user.token }}';
-            data.to = 'token@gmail.com';
-            var conn = new WebSocket('ws://127.0.0.1:8080?user={{ app.user.email }}&token={{ app.user.token }}');
-            conn.onmessage = function(e) { console.log(e.data); };
-            conn.onopen = function(e) {
-                var button = document.getElementById('envoyer');
-                button.onclick = sendMessage;
-                console.log('Connection Open');
-            };
-            function sendMessage(event)
-            {
-                event.preventDefault();
-                var contenu = document.getElementById('msg').value;
-                data.contenu = contenu;
-                msg = JSON.stringify(data);        
-                conn.send(msg);
-                console.log('Message Sent');
-                console.log('value:' + msg);
-            }
-        {% endif %}
-    </script>
+    {% if app.user %}
+        <script src="/js/chat.js"></script>
+    {% endif %}
 {% endblock %}
