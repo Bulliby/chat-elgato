@@ -1,10 +1,9 @@
 var data = new Object();
-data.email = '{{ app.user.email }}';
-data.token = '{{ app.user.token }}';
+data.email = email;
+data.token = token;
 //TODO: Put variable
 data.to = 'token@gmail.com';
-var conn = new WebSocket("ws://127.0.0.1:8080?user={{ app.user.email }}&token={{ app.user.token }}");
-
+var conn = new WebSocket("ws://127.0.0.1:8080?user=" + email + "&token=" + token);
 conn.onmessage = function(e) {
     console.log(e.data); 
 };

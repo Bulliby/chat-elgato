@@ -26,6 +26,7 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
     {
         $this->clients->attach($conn);
         $params = $conn->WebSocket->request->getQuery()->toArray();
+        var_dump($params);
         $user = $this->TokenIdCheck($params['token'], $params['user']);
         $this->clients->attach($user);
     }
