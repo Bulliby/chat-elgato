@@ -8,8 +8,8 @@
 {% block chatclient %}
     {% if app.user %}
         <script>
-            var email = '{{ app.user.email }}';
-            var token = '{{ app.user.token }}';
+            sessionStorage.setItem('email', '{{ app.user.email }}');
+            sessionStorage.setItem('token', '{{ app.user.token }}');
         </script>
         <script src="/js/chat.js"></script>
     {% endif %}
