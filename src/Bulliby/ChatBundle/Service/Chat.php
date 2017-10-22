@@ -24,21 +24,30 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
 
     public function onOpen(ConnectionInterface $conn) 
     {
-        $this->clients->attach($conn);
         $params = $conn->WebSocket->request->getQuery()->toArray();
-        var_dump($params);
-        $user = $this->TokenIdCheck($params['token'], $params['user']);
+        try {
+            $user = $this->TokenIdCheck($params['token'], $params['user']);
+        } catch (\Exception $e) {
+            //TODO: Log the attempt.
+            //Redirect on Error page and Logout
+        }
+        $this->clients->attach($conn);
         $this->clients->attach($user);
     }
 
     public function onMessage(ConnectionInterface $from, $msg) 
     {
 		if(($sender = $this->getUserWhoSendMsg($from)) === NULL)
-			throw new NotFoundHttpException('Vous n\'êtes pas enregistré dans la base');
-		if ($to = $this->canISendTheMessage($sender['user'], $msg))
-        {
-            $receiver = $this->getReceiver($to);
-            $receiver['conn']->send($msg); 
+			throw new NotFoundHttpException('Une erreur inconnue c\'est produite');
+        try {
+            if ($to = $this->canISendTheMessage($sender['user'], $msg))
+            {
+                $receiver = $this->getReceiver($to);
+                $receiver['conn']->send($msg); 
+            }
+        } catch(\Exception $e){
+            //TODO: Log the attempt.
+            //Redirect on Error page and Logout
         }
         $this->clients->rewind();
     }
