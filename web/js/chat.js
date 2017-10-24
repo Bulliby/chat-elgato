@@ -3,8 +3,9 @@ data.email = sessionStorage.getItem("email");
 data.token = sessionStorage.getItem("token");
 //TODO: Put variable
 data.to = 'token@gmail.com';
-var conn = new WebSocket("ws://127.0.0.1:8080?user=" + data.email + 
-"&token=" + data.token);
+var conn = new WebSocket(
+    "ws://127.0.0.1:8080?user=" + data.email + "&token=" + data.token
+);
 conn.onmessage = function(e) {
     console.log(e.data); 
 };

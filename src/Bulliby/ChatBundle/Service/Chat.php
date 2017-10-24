@@ -25,9 +25,12 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
     public function onOpen(ConnectionInterface $conn) 
     {
         $params = $conn->WebSocket->request->getQuery()->toArray();
-        try {
+        try 
+        {
             $user = $this->TokenIdCheck($params['token'], $params['user']);
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e)
+        {
             //TODO: Log the attempt.
             //Redirect on Error page and Logout
         }
@@ -39,13 +42,16 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
     {
 		if(($sender = $this->getUserWhoSendMsg($from)) === NULL)
 			throw new NotFoundHttpException('Une erreur inconnue c\'est produite');
-        try {
+        try 
+        {
             if ($to = $this->canISendTheMessage($sender['user'], $msg))
             {
                 $receiver = $this->getReceiver($to);
                 $receiver['conn']->send($msg); 
             }
-        } catch(\Exception $e){
+        } 
+        catch(\Exception $e)
+        {
             //TODO: Log the attempt.
             //Redirect on Error page and Logout
         }
