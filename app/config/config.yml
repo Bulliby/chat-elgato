@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-      #- { resource: services.yml }
+    - { resource: services.yml }
     - { resource: "@BullibyUserTokenBundle/Resources/config/services.yml" }
     - { resource: "@BullibyUserTokenBundle/Resources/config/security.yml" }
     - { resource: "@BullibyUserBundle/Resources/config/services.yml" }

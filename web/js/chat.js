@@ -1,13 +1,19 @@
 var data = new Object();
 data.email = sessionStorage.getItem("email");
 data.token = sessionStorage.getItem("token");
-//TODO: Put variable
-data.to = 'token@gmail.com';
+
 var conn = new WebSocket(
     "ws://127.0.0.1:8080?user=" + data.email + "&token=" + data.token
 );
+
 conn.onmessage = function(e) {
-    console.log(e.data); 
+    var date = new Date();
+    msg = '<p>' + date + ' : ' + JSON.parse(e.data).msg + '</p>';
+    var newDiv = document.createElement("p");
+    var newLine = document.createElement("br");
+    var newContent = document.createTextNode(date + ' : ' + JSON.parse(e.data).msg);
+    document.getElementById('chat-frame').appendChild(newContent);
+    document.getElementById('chat-frame').appendChild(newLine);
 };
 
 conn.onopen = function(e) {
@@ -19,7 +25,9 @@ function sendMessage(event)
 {
     event.preventDefault();
     var contenu = document.getElementById('msg').value;
-    data.contenu = contenu;
+    var to = document.getElementById('to').value;
+    data.to = to;
+    data.msg = contenu;
     msg = JSON.stringify(data);        
     conn.send(msg);
 }

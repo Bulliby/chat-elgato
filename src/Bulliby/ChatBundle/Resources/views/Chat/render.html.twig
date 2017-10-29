@@ -2,7 +2,12 @@
 {% block body %}
     <h1>Chat El-Gato</h1>
     <input type="text" name="msg" id="msg"></input>
+    <select id="to" name="select">
+        {% for user in users %}
+            <option value="{{ user.email }}">{{ user.name }}</option>
+        {% endfor %} 
     <input type="submit" name="envoyer" id="envoyer"></input>
+    <div id="chat-frame"></div>
 {% endblock %}
 
 {% block chatclient %}

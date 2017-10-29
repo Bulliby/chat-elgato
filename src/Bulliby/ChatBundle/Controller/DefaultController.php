@@ -6,17 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+
+use AppBundle\Entity\User;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
-    public function indexAction()
-    {
-        return $this->render('BullibyChatBundle:Chat:render.html.twig', array());
-    }
-
     /**
      * @Route("/test", name="test")
      */

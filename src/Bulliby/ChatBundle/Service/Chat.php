@@ -5,7 +5,7 @@ namespace Bulliby\ChatBundle\Service;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Bulliby\ChatBundle\Inter\SecurityCheckInterface;
@@ -16,7 +16,7 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
     private $em;
     private $msg;
 
-    public function __construct(EntityManager $em) 
+    public function __construct(EntityManagerInterface $em) 
     {
         $this->clients = new \SplObjectStorage;
         $this->em = $em;
@@ -106,9 +106,6 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
     {
 		$this->msg = json_decode($msg);
         $to = $this->em->getRepository('AppBundle:User')->findOneBy(array('email' => $this->msg->to));
-        if (empty($to) || $to->getFamilly() != $sender->getFamilly())
-            throw new AccessDeniedHttpException('Vous ne pouvez contacter cette personne');
-        
         return $to;
     }
 
