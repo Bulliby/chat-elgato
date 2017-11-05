@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a1f1319cf956da65ceb12f8e837d0c9",
+    "content-hash": "e58d54fad2897769424bd19675de98cd",
     "packages": [
         {
             "name": "bulliby/user-bundle",
@@ -29,33 +29,6 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "A User Bundle: One more",
             "time": "2017-09-10T13:08:35+00:00"
-        },
-        {
-            "name": "bulliby/user-token-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Bulliby/UserTokenBundle.git",
-                "reference": "f82e1cdc7c3a564bfc634c26824354e0d14c8e58"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Bulliby/UserTokenBundle/zipball/f82e1cdc7c3a564bfc634c26824354e0d14c8e58",
-                "reference": "f82e1cdc7c3a564bfc634c26824354e0d14c8e58",
-                "shasum": ""
-            },
-            "require": {
-                "bulliby/user-bundle": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Bulliby\\UserToken": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "A token based Authentication: One more",
-            "time": "2017-09-10T13:04:09+00:00"
         },
         {
             "name": "cboden/ratchet",
@@ -3025,8 +2998,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bulliby/user-bundle": 20,
-        "bulliby/user-token-bundle": 20
+        "bulliby/user-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
