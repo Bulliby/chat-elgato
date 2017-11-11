@@ -9,17 +9,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Bulliby\ChatBundle\Inter\SecurityCheckInterface;
+use Psr\Log\LoggerInterface;
  
-class Chat implements MessageComponentInterface,  SecurityCheckInterface
+class Chat implements MessageComponentInterface, SecurityCheckInterface
 {
     protected $clients;
     private $em;
     private $msg;
+    private $log;
 
-    public function __construct(EntityManagerInterface $em) 
+    public function __construct(EntityManagerInterface $em, LoggerInterface $log) 
     {
         $this->clients = new \SplObjectStorage;
         $this->em = $em;
+        $this->log = $log;
     }
 
     public function onOpen(ConnectionInterface $conn) 
@@ -28,11 +31,10 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
         try 
         {
             $user = $this->TokenIdCheck($params['token'], $params['user']);
-        } 
+        }
         catch (\Exception $e)
         {
-            //TODO: Log the attempt.
-            //Redirect on Error page and Logout
+            $this->log->info('The token given by the client is unknow');
         }
         $this->clients->attach($conn);
         $this->clients->attach($user);
@@ -42,19 +44,12 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
     {
 		if(($sender = $this->getUserWhoSendMsg($from)) === NULL)
 			throw new NotFoundHttpException('Une erreur inconnue c\'est produite');
-        try 
-        {
-            if ($to = $this->canISendTheMessage($sender['user'], $msg))
-            {
-                $receiver = $this->getReceiver($to);
-                $receiver['conn']->send($msg); 
-            }
-        } 
-        catch(\Exception $e)
-        {
-            //TODO: Log the attempt.
-            //Redirect on Error page and Logout
-        }
+
+        $this->msg = json_decode($msg);
+        $to = $this->em->getRepository('AppBundle:User')->findOneBy(array('email' => $this->msg->to));
+        $receiver = $this->getReceiver($to);
+
+        $receiver['conn']->send($msg); 
         $this->clients->rewind();
     }
 
@@ -76,6 +71,9 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
 		return NULL;
 	}
 
+    /**
+     * Get the Socket connection for the kser
+     */
     public function getReceiver($to)
     {
         $receiver = [];
@@ -102,13 +100,6 @@ class Chat implements MessageComponentInterface,  SecurityCheckInterface
         return $user;
     }
     
-    private function canISendTheMessage($sender, $msg)
-    {
-		$this->msg = json_decode($msg);
-        $to = $this->em->getRepository('AppBundle:User')->findOneBy(array('email' => $this->msg->to));
-        return $to;
-    }
-
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";
