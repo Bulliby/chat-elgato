@@ -100,8 +100,19 @@ class Chat implements MessageComponentInterface, SecurityCheckInterface
         return $user;
     }
     
-    public function onClose(ConnectionInterface $conn) {
-        $this->clients->detach($conn);
+    public function onClose(ConnectionInterface $conn) 
+    {
+		$this->clients->rewind();
+        while($this->clients->valid()) 
+        {
+            if ($this->clients->current() === $conn)
+            {
+                $this->clients->detach($this->clients->current());
+                $this->clients->detach($this->clients->current());
+            }
+            if ($this->clients->valid())
+                $this->client->next();
+        }
         echo "Connection {$conn->resourceId} has disconnected\n";
     }
 
