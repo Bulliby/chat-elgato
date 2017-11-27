@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e58d54fad2897769424bd19675de98cd",
+    "content-hash": "6a1f1319cf956da65ceb12f8e837d0c9",
     "packages": [
         {
             "name": "bulliby/user-bundle",
@@ -12,23 +12,50 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bulliby/UserBundle.git",
-                "reference": "ecb5d71f840959124c0f5803f2d88bef1915d29d"
+                "reference": "20e8328265d08025eac5c163c9365f69521d2a97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bulliby/UserBundle/zipball/ecb5d71f840959124c0f5803f2d88bef1915d29d",
-                "reference": "ecb5d71f840959124c0f5803f2d88bef1915d29d",
+                "url": "https://api.github.com/repos/Bulliby/UserBundle/zipball/20e8328265d08025eac5c163c9365f69521d2a97",
+                "reference": "20e8328265d08025eac5c163c9365f69521d2a97",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Bulliby\\User": "src"
+                "psr-4": {
+                    "Bulliby\\UserBundle\\": "src/Bulliby/UserBundle"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "A User Bundle: One more",
-            "time": "2017-09-10T13:08:35+00:00"
+            "time": "2017-11-11 21:04:58"
+        },
+        {
+            "name": "bulliby/user-token-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bulliby/UserTokenBundle.git",
+                "reference": "c492898727238c89e375f1c63b8dfeb74e68c757"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bulliby/UserTokenBundle/zipball/c492898727238c89e375f1c63b8dfeb74e68c757",
+                "reference": "c492898727238c89e375f1c63b8dfeb74e68c757",
+                "shasum": ""
+            },
+            "require": {
+                "bulliby/user-bundle": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bulliby\\UserToken": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "A token based Authentication: One more",
+            "time": "2017-11-11 21:12:07"
         },
         {
             "name": "cboden/ratchet",
@@ -135,7 +162,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2017-09-09T10:48:27+00:00"
+            "time": "2017-09-09 10:48:27"
         },
         {
             "name": "doctrine/annotations",
@@ -203,7 +230,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-07-22T11:08:38+00:00"
+            "time": "2017-07-22 11:08:38"
         },
         {
             "name": "doctrine/cache",
@@ -279,7 +306,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-08-25T06:51:37+00:00"
+            "time": "2017-08-25 06:51:37"
         },
         {
             "name": "doctrine/collections",
@@ -347,7 +374,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2017-08-30T09:16:50+00:00"
+            "time": "2017-08-30 09:16:50"
         },
         {
             "name": "doctrine/common",
@@ -426,7 +453,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2017-09-02T17:51:46+00:00"
+            "time": "2017-09-02 17:51:46"
         },
         {
             "name": "doctrine/dbal",
@@ -499,7 +526,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-08-28T11:08:35+00:00"
+            "time": "2017-08-28 11:08:35"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -580,7 +607,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2017-08-25T11:49:20+00:00"
+            "time": "2017-08-25 11:49:20"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -735,7 +762,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2017-08-25T04:43:19+00:00"
+            "time": "2017-08-25 04:43:19"
         },
         {
             "name": "doctrine/instantiator",
@@ -789,7 +816,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2017-07-22T11:58:36+00:00"
+            "time": "2017-07-22 11:58:36"
         },
         {
             "name": "doctrine/lexer",
@@ -843,7 +870,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2017-07-24T09:37:08+00:00"
+            "time": "2017-07-24 09:37:08"
         },
         {
             "name": "doctrine/orm",
@@ -923,7 +950,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2017-09-04T09:40:06+00:00"
+            "time": "2017-09-04 09:40:06"
         },
         {
             "name": "egulias/email-validator",
@@ -1082,7 +1109,7 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2016-10-17T18:31:11+00:00"
+            "time": "2016-10-17 18:31:11"
         },
         {
             "name": "guzzle/common",
@@ -1335,7 +1362,7 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2015-11-10T17:04:01+00:00"
+            "time": "2015-11-10 17:04:01"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1388,7 +1415,7 @@
                 "highlight",
                 "sql"
             ],
-            "time": "2015-08-30T16:36:01+00:00"
+            "time": "2015-08-30 16:36:01"
         },
         {
             "name": "monolog/monolog",
@@ -1466,7 +1493,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-06-19T01:22:40+00:00"
+            "time": "2017-06-19 01:22:40"
         },
         {
             "name": "paragonie/random_compat",
@@ -1564,7 +1591,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2017-07-12T14:39:17+00:00"
+            "time": "2017-07-12 14:39:17"
         },
         {
             "name": "psr/cache",
@@ -1610,7 +1637,7 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2016-10-13T14:48:10+00:00"
+            "time": "2016-10-13 14:48:10"
         },
         {
             "name": "psr/container",
@@ -1659,7 +1686,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-06-28T15:35:32+00:00"
+            "time": "2017-06-28 15:35:32"
         },
         {
             "name": "psr/link",
@@ -1709,7 +1736,7 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2016-11-17T00:27:01+00:00"
+            "time": "2016-11-17 00:27:01"
         },
         {
             "name": "psr/log",
@@ -1756,7 +1783,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "psr/simple-cache",
@@ -1804,7 +1831,7 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-01-02T13:31:39+00:00"
+            "time": "2017-01-02 13:31:39"
         },
         {
             "name": "react/event-loop",
@@ -1846,7 +1873,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2017-04-27T10:56:23+00:00"
+            "time": "2017-04-27 10:56:23"
         },
         {
             "name": "react/promise",
@@ -1892,7 +1919,7 @@
                 "promise",
                 "promises"
             ],
-            "time": "2017-08-25T09:20:23+00:00"
+            "time": "2017-08-25 09:20:23"
         },
         {
             "name": "react/socket",
@@ -1934,7 +1961,7 @@
             "keywords": [
                 "Socket"
             ],
-            "time": "2017-01-26T09:23:38+00:00"
+            "time": "2017-01-26 09:23:38"
         },
         {
             "name": "react/stream",
@@ -1978,7 +2005,7 @@
                 "pipe",
                 "stream"
             ],
-            "time": "2017-01-25T14:44:14+00:00"
+            "time": "2017-01-25 14:44:14"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2030,7 +2057,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2017-08-25T16:55:44+00:00"
+            "time": "2017-08-25 16:55:44"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2100,7 +2127,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2017-08-25T21:14:31+00:00"
+            "time": "2017-08-25 21:14:31"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -2145,7 +2172,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2017-08-22T22:18:16+00:00"
+            "time": "2017-08-22 22:18:16"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2199,7 +2226,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-08-29T20:43:58+00:00"
+            "time": "2017-08-29 20:43:58"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2259,7 +2286,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2017-05-18T08:23:53+00:00"
+            "time": "2017-05-18 08:23:53"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -2312,7 +2339,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-07-05T15:09:33+00:00"
+            "time": "2017-07-05 15:09:33"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -2370,7 +2397,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14T15:44:48+00:00"
+            "time": "2017-06-14 15:44:48"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2429,7 +2456,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14T15:44:48+00:00"
+            "time": "2017-06-14 15:44:48"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -2485,7 +2512,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14T15:44:48+00:00"
+            "time": "2017-06-14 15:44:48"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -2544,7 +2571,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14T15:44:48+00:00"
+            "time": "2017-06-14 15:44:48"
         },
         {
             "name": "symfony/polyfill-util",
@@ -2596,7 +2623,7 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2017-07-05T15:09:33+00:00"
+            "time": "2017-07-05 15:09:33"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -2655,7 +2682,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2017-07-22T07:18:13+00:00"
+            "time": "2017-07-22 07:18:13"
         },
         {
             "name": "symfony/symfony",
@@ -2808,7 +2835,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-09-07T14:05:07+00:00"
+            "time": "2017-09-07 14:05:07"
         },
         {
             "name": "twig/twig",
@@ -2874,7 +2901,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-08-19T17:43:10+00:00"
+            "time": "2017-08-19 17:43:10"
         }
     ],
     "packages-dev": [
@@ -2930,7 +2957,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2017-07-23T07:08:53+00:00"
+            "time": "2017-07-23 07:08:53"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -2992,13 +3019,14 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-09-06T19:03:12+00:00"
+            "time": "2017-09-06 19:03:12"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bulliby/user-bundle": 20
+        "bulliby/user-bundle": 20,
+        "bulliby/user-token-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

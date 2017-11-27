@@ -22,6 +22,8 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "bulliby/user-bundle": "dev-master",
+        "bulliby/user-token-bundle": "dev-master",
         "cboden/ratchet": "^0.3.6",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",

@@ -1,4 +1,9 @@
-chat
+chat websoket bundle
 ====
 
-A Symfony project created on August 6, 2017, 3:50 pm.
+Symfony bundle made with Ratchet. Real-time websocket.
+
+#### TODO:
+* Design? yes.. maybe
+* Check for bug when page reload
+* put chat in bundle
